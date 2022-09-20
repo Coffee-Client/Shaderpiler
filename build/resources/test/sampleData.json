@@ -1,0 +1,26 @@
+{
+  "name": "coffee:lsd",
+  "sourceFrag": "lsd.fsh",
+  "sourceVert": null,
+  "samplers": [
+    "DiffuseSampler"
+  ],
+  "passes": [
+    {
+      "name": "%",
+      "input": "minecraft:main",
+      "output": "swap"
+    },
+    {
+      "name": "blit",
+      "input": "swap",
+      "output": "minecraft:main"
+    }
+  ],
+  "uniforms": {
+    "seed": [0.0],
+    "strength": [0.0],
+    "time": [0.0],
+    "rotations": [0.0]
+  }
+}
