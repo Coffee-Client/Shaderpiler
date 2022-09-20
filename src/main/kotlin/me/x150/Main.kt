@@ -19,6 +19,9 @@ fun main(args: Array<String>) {
         println("Input is not a directory")
         exitProcess(1)
     }
+    if (OUTPUT_DIRECTORY.exists()) {
+        OUTPUT_DIRECTORY.deleteRecursively()
+    }
     for (listedFile in f.listFiles()!!) {
         if (listedFile.name.endsWith(".json")) {
             parseJson(listedFile.name, f, listedFile.readText())
@@ -78,7 +81,6 @@ fun parseJson(name: String, sourceFolder: File, content: String) {
     val parsedPasses = mutableListOf<Pass>()
     for (pass in passes.withIndex()) {
         val passAsJsonObject = pass.value.asJsonObject
-        println(passAsJsonObject)
         val passName = passAsJsonObject.get("name").asString.let {
             if (it.equals("%")) {
                 shaderName
@@ -166,6 +168,7 @@ fun parseJson(name: String, sourceFolder: File, content: String) {
     if (file1.exists()) {
         file1.copyTo(outputSourceVert, overwrite = true)
     }
+    println("Compiled shader $parsedShaderName")
 }
 
 fun ensureFilesExist() {
